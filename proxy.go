@@ -71,7 +71,7 @@ func main() {
 		})
 	proxy.OnRequest(goproxy.ReqHostMatches(regexp.MustCompile("^.*$"))).
 		HandleConnect(goproxy.AlwaysMitm)
-	proxy.OnRequest(goproxy.ReqHostMatches(regexp.MustCompile("^.*:8080$"))).
+	proxy.OnRequest(goproxy.ReqHostMatches(regexp.MustCompile("^.*:80$"))).
 		HijackConnect(func(req *http.Request, client net.Conn, ctx *goproxy.ProxyCtx) {
 			defer func() {
 				if e := recover(); e != nil {
