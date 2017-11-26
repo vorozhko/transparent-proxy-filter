@@ -18,9 +18,9 @@ iptables -t mangle -X
 
 # Write new rules
 iptables -t nat -A PREROUTING -s $GOPROXY_SERVER -p tcp --dport $GOPROXY_PORT -j ACCEPT
-iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination $GOPROXY_SERVER:$GOPROXY_PORT
+iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination $GOPROXY_SERVER:$GOPROXY_PORT
 # The following line supports using goproxy as an explicit proxy in addition
-#iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination $GOPROXY_SERVER:$GOPROXY_PORT
-#iptables -t nat -A POSTROUTING -j MASQUERADE
-#iptables -t mangle -A PREROUTING -p tcp --dport $GOPROXY_PORT -j DROP
+iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination $GOPROXY_SERVER:$GOPROXY_PORT
+iptables -t nat -A POSTROUTING -j MASQUERADE
+iptables -t mangle -A PREROUTING -p tcp --dport $GOPROXY_PORT -j DROP
 
